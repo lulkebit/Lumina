@@ -1,2 +1,2 @@
 # Lumina
- Lumina Client
+ Lumina Minecraft-Client

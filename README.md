@@ -1,2 +1,5 @@
 # Lumina
- Lumina Minecraft-Client
+
+![](resources/logo.png)
+
+# Lumina Minecraft-Client

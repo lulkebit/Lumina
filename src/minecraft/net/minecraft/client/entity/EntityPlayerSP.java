@@ -1,5 +1,8 @@
 package net.minecraft.client.entity;
 
+import lumina.Client;
+import lumina.events.EventType;
+import lumina.events.listeners.EventUpdate;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.audio.MovingSoundMinecartRiding;
 import net.minecraft.client.audio.PositionedSoundRecord;
@@ -188,6 +191,10 @@ public class EntityPlayerSP extends AbstractClientPlayer
      */
     public void onUpdateWalkingPlayer()
     {
+        EventUpdate eventUpdate = new EventUpdate();
+        eventUpdate.setType(EventType.PRE);
+        Client.onEvent(eventUpdate);
+
         boolean flag = this.isSprinting();
 
         if (flag != this.serverSprintState)

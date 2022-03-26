@@ -55,9 +55,16 @@ public class Module {
     }
 
     public enum Category {
-        COMBAT,
-        MOVEMENT,
-        PLAYER,
-        RENDER;
+        COMBAT("Combat"),
+        MOVEMENT("Movement"),
+        PLAYER("Player"),
+        RENDER("Render");
+
+        public String name;
+        public int moduleIndex;
+
+        Category(String name){
+            this.name = name;
+        }
     }
 }

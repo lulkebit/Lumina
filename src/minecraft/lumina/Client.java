@@ -1,13 +1,17 @@
 package lumina;
 
 import lumina.events.Event;
+import lumina.events.listeners.EventKey;
 import lumina.modules.Module;
 import lumina.modules.movement.*;
+import lumina.modules.player.*;
 import lumina.modules.render.*;
 import lumina.ui.HUD;
 import lumina.util.config.Config;
 import org.lwjgl.opengl.Display;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 public class Client {
@@ -29,7 +33,11 @@ public class Client {
         modules.add(new Sprint());
 
         // Render
+        modules.add(new TabGUI());
         modules.add(new Fullbright());
+
+        // Player
+        modules.add(new NoFall());
     }
 
     public static void shutdown(){
@@ -48,11 +56,24 @@ public class Client {
     }
 
     public static void keyPress(int key){
+        Client.onEvent(new EventKey(key));
+
         for(Module module : modules){
             if(module.getKey() == key){
                 module.toggle();
             }
         }
+    }
+
+    public static List<Module> getModulesByCategory(Module.Category category){
+        List<Module> modules = new ArrayList<Module>();
+
+        for(Module module : Client.modules){
+            if(module.category == category)
+                modules.add(module);
+        }
+
+        return modules;
     }
 
 }

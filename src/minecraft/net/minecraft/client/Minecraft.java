@@ -1032,6 +1032,8 @@ public class Minecraft implements IThreadListener, IPlayerUsage
     {
         try
         {
+            Client.shutdown();
+
             this.stream.shutdownStream();
             logger.info("Stopping!");
 

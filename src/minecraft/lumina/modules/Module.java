@@ -1,5 +1,6 @@
 package lumina.modules;
 
+import lumina.Client;
 import lumina.events.Event;
 import net.minecraft.client.Minecraft;
 
@@ -13,8 +14,15 @@ public class Module {
 
     public Module(String name, int key, Category category){
         this.name = name;
-        this.key = key;
         this.category = category;
+
+        try {
+            this.key = (int) Client.config.config.get(name.toLowerCase() + " key");
+            this.toggled = (boolean) Client.config.config.get(name.toLowerCase() + " enabled");
+        } catch (NullPointerException e) {
+            this.key = key;
+            this.toggled = false;
+        }
     }
 
     public boolean isToggled() {

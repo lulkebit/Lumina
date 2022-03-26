@@ -5,42 +5,32 @@ import lumina.modules.Module;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.Gui;
+
 import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.renderer.GlStateManager;
 
-import java.util.Collections;
 import java.util.Comparator;
 
 public class HUD {
 
     public Minecraft mc = Minecraft.getMinecraft();
 
-    public static class ModuleComparator implements Comparator<Module> {
-
-        @Override
-        public int compare(Module o1, Module o2) {
-            if(Minecraft.getMinecraft().fontRendererObj.getStringWidth(o1.name) > Minecraft.getMinecraft().fontRendererObj.getStringWidth(o2.name)){
-                return -1;
-            } else if(Minecraft.getMinecraft().fontRendererObj.getStringWidth(o1.name) < Minecraft.getMinecraft().fontRendererObj.getStringWidth(o2.name)){
-                return 1;
-            }
-            return 0;
-        }
-    }
 
     public void draw(){
         ScaledResolution sr = new ScaledResolution(mc);
         FontRenderer fr = mc.fontRendererObj;
 
-        Collections.sort(Client.modules, new ModuleComparator());
+        Client.modules.sort(Comparator.comparingInt(module ->
+                fr.getStringWidth(((Module)module).name))
+                .reversed()
+        );
 
+        GlStateManager.pushMatrix();
         GlStateManager.translate(4, 4, 0);
         GlStateManager.scale(2, 2, 1);
         GlStateManager.translate(-4, -4, 0);
         fr.drawStringWithShadow(Client.name, 4, 4, -1);
-        GlStateManager.translate(4, 4, 0);
-        GlStateManager.scale(0.5, 0.5, 1);
-        GlStateManager.translate(-4, -4, 0);
+        GlStateManager.popMatrix();
 
         int count = 0;
         for(Module module : Client.modules){

@@ -12,22 +12,15 @@ public class VanillaFly extends Module {
     }
 
     @Override
-    public void onEnable(){
-        mc.thePlayer.capabilities.isFlying = true;
-        mc.thePlayer.capabilities.allowFlying = true;
-    }
-
-    @Override
     public void onDisable(){
         mc.thePlayer.capabilities.isFlying = false;
-        mc.thePlayer.capabilities.allowFlying = false;
     }
 
     @Override
     public void onEvent(Event event){
         if(event instanceof EventUpdate){
             if(event.isPre()){
-
+                mc.thePlayer.capabilities.isFlying = true;
             }
         }
     }

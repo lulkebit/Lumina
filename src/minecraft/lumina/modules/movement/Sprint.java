@@ -18,14 +18,15 @@ public class Sprint extends Module {
 
     @Override
     public void onDisable(){
-        mc.thePlayer.setSprinting(false);
+        mc.thePlayer.setSprinting(mc.gameSettings.keyBindSprint.isPressed());
     }
 
     @Override
     public void onEvent(Event event){
         if(event instanceof EventUpdate){
             if(event.isPre()){
-                mc.thePlayer.setSprinting(true);
+                if(mc.thePlayer.moveForward > 0 && !mc.thePlayer.isUsingItem() && !mc.thePlayer.isSneaking() && !mc.thePlayer.isCollidedHorizontally)
+                    mc.thePlayer.setSprinting(true);
             }
         }
     }

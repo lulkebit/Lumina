@@ -3,6 +3,7 @@ package lumina;
 import lumina.events.Event;
 import lumina.events.listeners.EventKey;
 import lumina.modules.Module;
+import lumina.modules.combat.*;
 import lumina.modules.movement.*;
 import lumina.modules.player.*;
 import lumina.modules.render.*;
@@ -38,6 +39,9 @@ public class Client {
 
         // Player
         modules.add(new NoFall());
+
+        // Combat
+        // modules.add(new Killaura());
     }
 
     public static void shutdown(){

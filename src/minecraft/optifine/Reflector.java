@@ -8,6 +8,8 @@ import java.lang.reflect.Method;
 import java.util.List;
 import java.util.Map;
 import javax.vecmath.Matrix4f;
+
+import lumina.ui.MainMenu;
 import net.minecraft.block.Block;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.state.IBlockState;
@@ -267,8 +269,8 @@ public class Reflector
     private static boolean logVanilla = logEntry("*** Reflector Vanilla ***");
     public static ReflectorClass ChunkProviderClient = new ReflectorClass(ChunkProviderClient.class);
     public static ReflectorField ChunkProviderClient_chunkMapping = new ReflectorField(ChunkProviderClient, LongHashMap.class);
-    public static ReflectorClass GuiMainMenu = new ReflectorClass(GuiMainMenu.class);
-    public static ReflectorField GuiMainMenu_splashText = new ReflectorField(GuiMainMenu, String.class);
+    public static ReflectorClass MainMenu = new ReflectorClass(lumina.ui.MainMenu.class);
+    public static ReflectorField GuiMainMenu_splashText = new ReflectorField(MainMenu, String.class);
     public static ReflectorClass Minecraft = new ReflectorClass(Minecraft.class);
     public static ReflectorField Minecraft_defaultResourcePack = new ReflectorField(Minecraft, DefaultResourcePack.class);
     public static ReflectorClass ModelHumanoidHead = new ReflectorClass(ModelHumanoidHead.class);

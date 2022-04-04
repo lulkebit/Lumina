@@ -2,7 +2,12 @@ package lumina.modules;
 
 import lumina.Client;
 import lumina.events.Event;
+import lumina.util.settings.Setting;
 import net.minecraft.client.Minecraft;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Arrays;
 
 public class Module {
 
@@ -11,6 +16,10 @@ public class Module {
     public int key;
     public Category category;
     public Minecraft mc = Minecraft.getMinecraft();
+
+    public boolean expanded;
+    public int index;
+    public List<Setting> settings = new ArrayList<Setting>();
 
     public Module(String name, int key, Category category){
         this.name = name;
@@ -23,6 +32,10 @@ public class Module {
             this.key = key;
             this.toggled = false;
         }
+    }
+
+    public void addSettings(Setting... settings){
+        this.settings.addAll(Arrays.asList(settings));
     }
 
     public boolean isToggled() {

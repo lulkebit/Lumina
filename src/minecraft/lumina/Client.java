@@ -41,7 +41,7 @@ public class Client {
         modules.add(new NoFall());
 
         // Combat
-        // modules.add(new Killaura());
+        modules.add(new Killaura());
     }
 
     public static void shutdown(){

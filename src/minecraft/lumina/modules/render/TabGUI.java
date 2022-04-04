@@ -6,6 +6,7 @@ import lumina.events.listeners.EventKey;
 import lumina.events.listeners.EventRenderGUI;
 import lumina.events.listeners.EventUpdate;
 import lumina.modules.Module;
+import lumina.util.settings.Setting;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.Gui;
 import org.lwjgl.input.Keyboard;
@@ -51,6 +52,16 @@ public class TabGUI extends Module {
                 for (Module module : modules) {
                     fr.drawStringWithShadow(module.name, 65, 30 + count * 16, -1);
 
+                    // if(count == category.moduleIndex && module.expanded){
+                        // Gui.drawRect(62 + 60, 25.5, 62 + 60 + 60, 30 + module.settings.size() * 15, 0x90000000);
+                        // Gui.drawRect(62 + 60, 28 + module.index * 16, 7 + 53 + 60 + 60, 28 + module.index * 16 + 11, 0xff0090ff);
+                        // int index = 0;
+                        // for (Setting setting : module.settings) {
+                            // fr.drawStringWithShadow(setting.name, 65 + 60, 30 + index * 16, -1);
+                            // index++;
+                        //}
+                    // }
+
                     count++;
                 }
             }
@@ -91,12 +102,17 @@ public class TabGUI extends Module {
                     expanded = true;
                 }
             } else if(key == Keyboard.KEY_LEFT){
+                if(expanded && modules.get(category.moduleIndex).expanded){
+                    modules.get(category.moduleIndex).expanded = false;
+                }
                 expanded = false;
             } else if(key == Keyboard.KEY_RETURN){
                 if(expanded){
                     Module module = modules.get(category.moduleIndex);
                     if(!module.name.equals("TabGUI"))
                         module.toggle();
+                } else {
+                    expanded = true;
                 }
             }
         }
